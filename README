@@ -1,0 +1,3 @@
+Standard ML (MLton and Poly/ML) bindings for Google's Gumbo HTML5 parser library
+
+gumbo-parser is https://github.com/google/gumbo-parser
