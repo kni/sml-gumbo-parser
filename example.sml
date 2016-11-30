@@ -1,9 +1,19 @@
 open Gumbo
 
 
+fun readHtml () =
+  let
+    val args = CommandLine.arguments()
+    val _ = if List.null args then print "Set file as argument.\n" else ()
+    val file = List.nth(args, 0)
+  in
+    TextIO.inputAll (TextIO.openIn file)
+  end
+
+
 fun main' () =
   let
-    val s = "<html><head><title>Standard ML</title></head><p>Whole-program optimizing: <a href='http://mlton.org/' a='A'>MLton</a>.</p><p>Full multiprocessor support: <a href='http://www.polyml.org/'>Poly/ML</a>.</p></html>";
+    val s = readHtml ()
 
     val output = parse s
     val root_node = root output
@@ -36,10 +46,10 @@ fun main' () =
          | NodeWhitespace => print "is NodeWhitespace\n"
          | nt => print ( "NodeType is : " ^ ( showNodeType nt) ^ "\n")
 
+    (*
     val _ = doit root_node
     val _ = print "\n\n"
-
-
+    *)
 
 
 
@@ -120,6 +130,7 @@ fun main' () =
                  | TagBody  => doTagBody node
                  | _        => doChildren e doTagHtml
              end
+         | NodeWhitespace => ()
          | _ => raise Gumbo "doTagHtml"
 
 

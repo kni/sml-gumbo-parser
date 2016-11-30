@@ -2,10 +2,10 @@ all:
 	@echo "targets: poly mlton clean"
 
 poly: example-poly
-	./example-poly
+	./example-poly example.html
 
 mlton: example-mlton
-	./example-mlton
+	./example-mlton example.html
 
 example-poly: gumbo-common.sml gumbo-common.sig gumbo-constants.sml gumbo-poly.sml gumbo.sig example.sml example.mlp
 	polyc -o example-poly example.mlp

@@ -6,6 +6,8 @@ struct
   datatype Document = Document of MLton.Pointer.t
   datatype Element  = Element  of MLton.Pointer.t
 
+  val () = MLton.Exn.addExnMessager (fn GumboCommon.Gumbo m => SOME ("Gumbo \"" ^ m ^ "\"") | _ => NONE)
+
   open GumboCommon
   open MLton.Pointer
   structure C = GumboConstants
