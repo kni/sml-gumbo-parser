@@ -34,16 +34,11 @@ struct
 
   fun readCString p =
     let
-      fun doit p l =
-        let
-          val w = Memory.get8(p, 0w0)
-        in
-          if w = 0w0
-          then String.implode (List.rev l)
-          else doit (Memory.++(p, 0w1)) ((Byte.byteToChar w)::l)
-        end
+      fun len i = if Memory.get8 (p, i) = 0w0 then i else len (i + 0w1)
+      val length = Word.toInt (len 0w0)
+      fun getChar i = Byte.byteToChar (Memory.get8 (p, Word.fromInt i))
     in
-      doit p []
+      CharVector.tabulate(length, getChar)
     end
 
   fun readCStringP p = readCString (Memory.getAddress(p, 0w0))
