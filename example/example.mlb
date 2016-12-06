@@ -1,0 +1,12 @@
+local
+	$(SML_LIB)/basis/mlton.mlb
+	$(SML_LIB)/basis/basis.mlb
+in
+	../gumbo-common.sig
+	../gumbo-common.sml
+	../gumbo-constants.sml
+	../gumbo.sig
+	../gumbo-mlton.sml
+	example.sml
+	main.sml
+end
