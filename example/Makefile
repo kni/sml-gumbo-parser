@@ -12,10 +12,10 @@ poly: example-poly
 mlton: example-mlton
 	./example-mlton example.html
 
-example-poly: ${GUMBO_FILES} example.sml example.mlp
+example-poly: ${GUMBO_FILES} example-parse.sml example.sml example.mlp
 	polyc -o example-poly example.mlp
 
-example-mlton: ${GUMBO_FILES} example.sml example.mlb
+example-mlton: ${GUMBO_FILES} example-parse.sml example.sml example.mlb
 	mlton -default-ann 'allowFFI true' -link-opt -lgumbo -output example-mlton example.mlb
 
 

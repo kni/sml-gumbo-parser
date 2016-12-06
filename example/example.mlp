@@ -3,4 +3,5 @@ use "../gumbo-common.sml";
 use "../gumbo-constants.sml";
 use "../gumbo.sig";
 use "../gumbo-poly.sml";
+use "example-parse.sml";
 use "example.sml";
