@@ -13,16 +13,16 @@ fun charsetFromBOM s =
 local
   open Scancom
 
-  fun takeBeforeAndIt s = takeBefore s *> takeN (String.size s)
-
   val takeWS = takeWhile Char.isSpace
 
   val scanner =
-    takeBeforeAndIt "charset" *>
+    takeStr "charset" *>
     takeWS *>
-    takeBeforeAndIt "=" *>
+    takeStr "=" *>
     takeWS *>
     takeTill (fn c => Char.isSpace c orelse c = #";")
+
+  val scanner = find scanner
 
 in
   fun findCharset (s:string) : string option =
