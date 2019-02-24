@@ -19,7 +19,7 @@ struct
 
 
   local
-    val parse_ffi = buildCall3 ((getSymbol libgumbo "gumbo_parse_with_options"), (cPointer, cString, cInt), cPointer)
+    val parse_ffi = buildCall3 ((getSymbol libgumbo "gumbo_parse_with_options"), (cPointer, cString, cUint), cPointer)
   in
     fun parse s = Output (parse_ffi ((symbolAsAddress symbol_kGumboDefaultOptions), s, String.size s))
   end

@@ -17,9 +17,9 @@ struct
 
 
   local
-    val parse_ffi = _import "gumbo_parse_with_options" : t * string * int -> t;
+    val parse_ffi = _import "gumbo_parse_with_options" : t * string * Word32.word -> t;
   in
-    fun parse s = Output (parse_ffi (kGumboDefaultOptions, s, String.size s))
+    fun parse s = Output (parse_ffi (kGumboDefaultOptions, s, (Word32.fromInt (String.size s))))
   end
 
 
