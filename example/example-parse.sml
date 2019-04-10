@@ -13,31 +13,12 @@ fun exampleParse s findCharset =
       end
 
 
+    datatype textType = TextPlain | TextScript | TextStyle
+    val textType = ref TextPlain
+
 
     fun printAttributes attr = if List.null attr then () else
         print ( "Attrs: " ^ (String.concatWith "; " (List.map (fn(n,v) => n ^ " is " ^ v ) attr)) ^ "\n")
-
-    fun doit node =
-      case nodeType node of
-           NodeElement =>
-             let
-               val e = nodeElement node
-               val tn = tagName e
-               val _ = print ("tagName is " ^ (showTagName tn) ^ "\n")
-               val attr = tagAttributes e
-               val _ = printAttributes attr
-             in
-               doChildren e doit
-             end
-         | NodeText => (print "nodeText: "; print ((nodeText node) ^ "\n") )
-         | NodeWhitespace => print "is NodeWhitespace\n"
-         | nt => print ( "NodeType is : " ^ ( showNodeType nt) ^ "\n")
-
-    (*
-    val _ = doit root_node
-    val _ = print "\n\n"
-    *)
-
 
 
     fun getTextList node : string list =
@@ -52,7 +33,7 @@ fun exampleParse s findCharset =
          | NodeText => [nodeText node]
          | _ => []
 
-    fun getText node : string = String.concat (getTextList node)
+    fun getText node : string = if !textType = TextPlain then String.concat (getTextList node) else ""
 
 
     fun getAttrValue (attr, name) =
@@ -127,15 +108,18 @@ fun exampleParse s findCharset =
            NodeElement =>
              let
                val e = nodeElement node
+               val tn = tagName e
              in
-               case tagName e of
+               if tn = TagStyle then textType := TextStyle else  if tn = TagScript then textType := TextScript else ();
+               case tn of
                     TagA => doTagA node
                   | TagP => dataText := "\n  "::(!dataText)
                   | _    => ()
                ;
-               doChildren e doTagBody
+               doChildren e doTagBody;
+               textType := TextPlain
              end
-         | NodeText => dataText := (nodeText node)::(!dataText)
+         | NodeText => if !textType = TextPlain then dataText := (nodeText node)::(!dataText) else ()
          | _ => ()
          (*
          | NodeWhitespace => print "is NodeWhitespace\n"
