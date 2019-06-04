@@ -64,6 +64,9 @@ struct
   end
 
 
+  fun tagPosition (Element element) = getInt32(add(element, (Word.fromInt C.offsetof_GumboSourcePosition)), 0)
+
+
   fun gumboVector p =
     let
       val cnt_p = add(p, sizeofPointer)

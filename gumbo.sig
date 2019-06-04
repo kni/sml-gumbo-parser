@@ -22,4 +22,5 @@ sig
 
   val tagName:       Element -> TagName
   val tagAttributes: Element -> (string * string) list
+  val tagPosition:   Element -> int
 end

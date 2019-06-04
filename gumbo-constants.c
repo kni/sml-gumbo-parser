@@ -12,6 +12,7 @@ int main () {
 	printf("  val offsetof_ActualNodeData = %zu\n", offsetof(struct GumboInternalNode, v));
 	printf("  val offsetof_ElementTag = %zu\n", offsetof(GumboElement, tag));
 	printf("  val offsetof_ElementAttributes = %zu\n", offsetof(GumboElement, attributes));
+	printf("  val offsetof_GumboSourcePosition = %zu\n", offsetof(GumboElement, start_pos));
 	printf("  val offsetof_GumboAttributeName = %zu\n", offsetof(GumboAttribute, name));
 	printf("  val offsetof_GumboAttributeValue = %zu\n", offsetof(GumboAttribute, value));
 
