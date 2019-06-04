@@ -83,7 +83,7 @@ struct
 
 
   local
-    fun tagAttributeNameValuse p =
+    fun tagAttributeNameValues p =
       let
         val name_p  = add(p, (Word.fromInt C.offsetof_GumboAttributeName))
         val value_p = add(p, (Word.fromInt C.offsetof_GumboAttributeValue))
@@ -92,9 +92,9 @@ struct
       end
   in
     fun tagAttributes (Element element) =
-        let 
+        let
           val atts_p    = add(element, (Word.fromInt C.offsetof_ElementAttributes))
-          val atts_list = List.map tagAttributeNameValuse (gumboVector atts_p)
+          val atts_list = List.map tagAttributeNameValues (gumboVector atts_p)
         in atts_list end
   end
 
